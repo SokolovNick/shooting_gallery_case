@@ -10,7 +10,7 @@ pygame.display.set_caption("Shooting Gallery")
 icon = pygame.image.load("img/icon.png")
 pygame.display.set_icon(icon)
 
-target_img = pygame.image.load("img/")
+target_img = pygame.image.load("img/target_duck.png")
 target_width = 50
 target_height = 50
 
