@@ -150,6 +150,23 @@ def show_high_scores():
                 scores_display_running = False
 
 
+def countdown():
+    countdown_time = 3  # Start from 3
+    while countdown_time > 0:
+        screen.fill((0, 0, 0))  # Clear the screen
+        countdown_text = font.render(str(countdown_time), True, (255, 255, 255))
+        screen.blit(countdown_text, (SCREEN_WIDTH // 2 - countdown_text.get_width() // 2, SCREEN_HEIGHT // 2))
+        pygame.display.update()
+        time.sleep(1)  # Wait for 1 second
+        countdown_time -= 1
+
+    # Display "GO!" message before starting
+    screen.fill((0, 0, 0))
+    go_text = font.render("GO!", True, (255, 255, 255))
+    screen.blit(go_text, (SCREEN_WIDTH // 2 - go_text.get_width() // 2, SCREEN_HEIGHT // 2))
+    pygame.display.update()
+    time.sleep(1)
+
 
 def main_game(user_name):
     target_width = target_img.get_width()
@@ -208,16 +225,29 @@ def main_game(user_name):
 
         pygame.display.update()
 
+    # End screen logic
     screen.fill((0, 0, 0))
     end_text = font.render(f"Time's up. Your score: {score}", True, (255, 255, 255))
     save_high_score(user_name, score)
-    screen.blit(end_text, (SCREEN_WIDTH // 2 - end_text.get_width() // 2, SCREEN_HEIGHT // 2))
+    screen.blit(end_text, (SCREEN_WIDTH // 2 - end_text.get_width() // 2, SCREEN_HEIGHT // 2 - 50))
+    draw_text("Press ESC to return to the main menu.", small_font, (255, 255, 255), SCREEN_WIDTH // 2 - 220, SCREEN_HEIGHT // 2 + 50)
     pygame.display.update()
-    time.sleep(3)
+
+    wait_for_menu = True
+    while wait_for_menu:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                wait_for_menu = False
+
+    start_menu()  # Return to the main menu
 
 
 # Run the start menu
 pygame.mixer.music.play(-1)
-user_name = start_menu()
-main_game(user_name)
+user_name = start_menu()  # Get the user's name from the start menu
+countdown()               # Run the countdown before starting the game
+main_game(user_name)      # Pass it to the main_game function
 pygame.quit()
