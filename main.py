@@ -3,6 +3,12 @@ import random
 
 pygame.init()
 
+pygame.mixer.init()
+
+pygame.mixer.music.load("music/background_music.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+
 SCREEN_WIDTH = 760
 SCREEN_HEIGHT = 760
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -15,7 +21,6 @@ background_img = pygame.image.load("img/space_background.png")
 target_img = pygame.image.load("img/target_ufo.png")
 crosshair_img = pygame.image.load("img/crosshair.png")
 
-# Получите размеры изображений
 target_width = target_img.get_width()
 target_height = target_img.get_height()
 

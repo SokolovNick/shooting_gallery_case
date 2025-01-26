@@ -3,6 +3,12 @@ import random
 
 pygame.init()
 
+pygame.mixer.init()
+
+pygame.mixer.music.load("music/background_music.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
+
 SCREEN_WIDTH = 760
 SCREEN_HEIGHT = 760
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -13,17 +19,14 @@ pygame.display.set_icon(icon)
 
 background_img = pygame.image.load("img/space_background.png")
 target_img = pygame.image.load("img/target_ufo.png")
-crosshair_img = pygame.image.load("img/crosshair.png")  # Загрузите изображение прицела
+crosshair_img = pygame.image.load("img/crosshair.png")
 
-# Получите размеры изображений
 target_width = target_img.get_width()
 target_height = target_img.get_height()
 
-# Инициализируйте позицию цели
 target_x = random.randint(0, SCREEN_WIDTH - target_width)
 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
-# Скрыть системный курсор мыши
 pygame.mouse.set_visible(False)
 
 running = True
@@ -38,13 +41,10 @@ while running:
                 target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_height)
 
-    # Получите текущую позицию курсора мыши
     mouse_x, mouse_y = pygame.mouse.get_pos()
 
-    # Отобразите цель
     screen.blit(target_img, (target_x, target_y))
 
-    # Отобразите прицел в центре курсора
     crosshair_offset_x = crosshair_img.get_width() // 2
     crosshair_offset_y = crosshair_img.get_height() // 2
     screen.blit(crosshair_img, (mouse_x - crosshair_offset_x, mouse_y - crosshair_offset_y))
