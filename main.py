@@ -141,7 +141,7 @@ def main_game():
                     explosions.append((target_x, target_y, time.time()))
                     target_x = random.randint(0, SCREEN_WIDTH - target_width)
                     target_y = random.randint(0, SCREEN_HEIGHT - target_height)
-                    score += 25
+                    score += 10
 
         for explosion in explosions[:]:
             explosion_x, explosion_y, explosion_start_time = explosion
