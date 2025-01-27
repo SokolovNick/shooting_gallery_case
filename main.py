@@ -230,7 +230,8 @@ def main_game(user_name):
     end_text = font.render(f"Time's up. Your score: {score}", True, (255, 255, 255))
     save_high_score(user_name, score)
     screen.blit(end_text, (SCREEN_WIDTH // 2 - end_text.get_width() // 2, SCREEN_HEIGHT // 2 - 50))
-    draw_text("Press ESC to return to the main menu.", small_font, (255, 255, 255), SCREEN_WIDTH // 2 - 220, SCREEN_HEIGHT // 2 + 50)
+    draw_text("Press ESC to return to the main menu.", small_font, (255, 255, 255), SCREEN_WIDTH // 2 - 220,
+              SCREEN_HEIGHT // 2 + 50)
     pygame.display.update()
 
     wait_for_menu = True
@@ -242,6 +243,7 @@ def main_game(user_name):
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 wait_for_menu = False
 
+    pygame.mouse.set_visible(True)  # Re-enable the mouse cursor
     start_menu()  # Return to the main menu
 
 
